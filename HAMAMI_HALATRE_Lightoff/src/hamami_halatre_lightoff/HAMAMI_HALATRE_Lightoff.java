@@ -15,8 +15,8 @@ public class HAMAMI_HALATRE_Lightoff {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        pqnrgflkqznrg
-                qoqoqo
+        //pqnrgflkqznrg
+          //      qoqoqo
     }
     
 }
