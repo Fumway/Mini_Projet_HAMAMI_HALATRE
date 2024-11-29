@@ -51,5 +51,29 @@ public void activerLigneDeCellules(int idLigne) {
     }
 }
 
+public void activerColonneDeCellules(int idColonne) {
+    // Vérifier si l'indice de colonne est valide
+    if (idColonne >= 0 && idColonne < nbColonnes) {
+        for (int i = 0; i < nbLignes; i++) {
+            matriceCellules[i][idColonne].alumer_la_cellule(); // Active la cellule
+        }
+    } else {
+        System.out.println("L'indice de la colonne est invalide.");
+    }
+}
+
+public void activerDiagonaleDescendante() {
+    for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
+        matriceCellules[i][i].alumer_la_cellule(); // Active la cellule sur la diagonale descendante
+    }
+}
+
+public void activerDiagonaleMontante() {
+    for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
+        matriceCellules[i][nbColonnes - 1 - i].alumer_la_cellule(); // Active la cellule sur la diagonale montante
+    }
+}
+
+
 
 }
