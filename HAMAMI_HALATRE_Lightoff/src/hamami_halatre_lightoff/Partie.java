@@ -4,36 +4,38 @@
  */
 package hamami_halatre_lightoff;
 
+import java.util.Scanner;
+
 /**
  *
  * @author enniohalatre
  */
 public class Partie {                                                       //creation de la classe partie 
-    private GrilleDeJeu grille;                                             // attribut de la calsse partie 
+    private GrilleDeCellules grille;                                             // attribut de la calsse partie 
     private int nbcoups; 
 
-    public Partie(int nbLignes, int nbColonnes) {                           // Constructeur de la classe partie qui initialise le nb de colones et de lignes
-    this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
+    public Partie(int p_nbLignes, int p_nbColonnes) {                           // Constructeur de la classe partie qui initialise le nb de colones et de lignes
+    this.grille = new GrilleDeCellules(p_nbLignes, p_nbColonnes);
     this.nbcoups = 0;                                                       // initialisation du nb de coups du joueur a 0 
     }
     
 public void InitialiserPartie() {
     grille.eteindreToutesLesCellules();                                     // étein toutes les cellules pour démarer la partie 
-    grille.melangerMatriceAleatoirement(nbToursMelange);                    // Mélange la grille
+    grille.melangerMatriceAleatoirement();                                  // Mélange la grille
 }  
       
-public void LancerPartie static {
+public void LancerPartie () {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Bienvenue dans le jeu lightsoff ! ");
     System.out.println("Bienvenue dans le jeu lightsoff ! ");
-    
+
     while (!grille.cellulesToutesEteintes()) {                                              // Tant qu'il reste des cellules allumées
         System.out.println(grille);                                                         // Affiche l'état actuel de la grille
         System.out.println("choissis une action (ligne, colonne ou diagonale) :");
         System.out.println("1 - Activer une ligne");
         System.out.println("2 - Activer une colonne");
-        System.out.println("3 - Activer la diagonale gauche");
-        System.out.println("4 - Activer la diagonale droite");
+        System.out.println("3 - Activer la diagonale Descendante");
+        System.out.println("4 - Activer la diagonale Montante");
         
         int choix = scanner.nextInt();                                                      // Récupère l'action du joueur
         
@@ -48,15 +50,15 @@ public void LancerPartie static {
                 int colonne = scanner.nextInt();
                 grille.activerColonneDeCellules(colonne);                                   // Active la colonne choissis 
             }
-            case 3 -> grille.activerDiagonaleGauche(); // Active la diagonale descendante
-            case 4 -> grille.activerDiagonaleDroite(); // Active la diagonale montante
+            case 3 -> grille.activerDiagonaleDescendante(); // Active la diagonale descendante
+            case 4 -> grille.activerDiagonaleMontante(); // Active la diagonale montante
             default -> System.out.println("Choix invalide, réessayez.");
-        }
+    }
         
-        nbCoups++;                                                                          // Incrémente le compteur de coups
+        nbcoups++;                                                                          // Incrémente le compteur de coups
     }
     
-    System.out.println("Bravo ! Vous avez gagné en " + nbCoups + " coups.");
-}
+    System.out.println("Bravo ! Vous avez gagné en " + nbcoups + " coups.");
+    }  
    
 }
