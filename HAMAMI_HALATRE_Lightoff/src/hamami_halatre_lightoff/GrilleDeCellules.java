@@ -9,19 +9,19 @@ package hamami_halatre_lightoff;
  * @author enniohalatre
  */
 public class GrilleDeCellules {
-    private int nombreLignes; // Nombre de lignes de la grille
-    private int nombreColonnes; // Nombre de colonnes de la grille
+    private int nbLignes; // Nombre de lignes de la grille
+    private int nbColonnes; // Nombre de colonnes de la grille
     private CelluleLumineuse[][] matriceCellules; // La grille contenant les cellules lumineuses
  
-public GrilleDeCellules(int lignes, int colonnes) {
-    this.nombreLignes = lignes;
-    this.nombreColonnes = colonnes;
-    this.matriceCellules = new CelluleLumineuse[lignes][colonnes];
+public GrilleDeCellules(int p_nbLignes, int p_nbColonnes) {
+    this.nbLignes = p_nbLignes;
+    this.nbColonnes = p_nbColonnes;
+    this.matriceCellules = new CelluleLumineuse[p_nbLignes][p_nbColonnes];
 
     // Création de chaque CelluleLumineuse dans la grille
-    for (int i = 0; i < lignes; i++) {
-        for (int j = 0; j < colonnes; j++) {
-            this.matriceCellules[i][j] = new CelluleLumineuse(); // Par défaut, cellule éteinte
+    for (int i = 0; i < p_nbLignes; i++) {
+        for (int j = 0; j < p_nbColonnes; j++) {
+            this.matriceCellules[i][j] = new CelluleLumineuse(false); // Par défaut, cellule éteinte
         }
     }
 }
@@ -29,14 +29,27 @@ public GrilleDeCellules(int lignes, int colonnes) {
 public String toString() {
     StringBuilder builder = new StringBuilder();
 
-    for (int i = 0; i < nombreLignes; i++) {
-        for (int j = 0; j < nombreColonnes; j++) {
-            builder.append(matriceCellules[i][j].etat() ? "O" : ".");
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            builder.append(matriceCellules[i][j].toString());
+
         }
         builder.append("\n"); // Saut de ligne après chaque ligne de la grille
     }
 
     return builder.toString();
 }
-    
+
+public void activerLigneDeCellules(int idLigne) {
+    // Vérifier si l'indice de ligne est valide
+    if (idLigne >= 0 && idLigne < nbLignes) {
+        for (int j = 0; j < nbColonnes; j++) {
+            matriceCellules[idLigne][j].alumer_la_cellule(); // Active la cellule
+        }
+    } else {
+        System.out.println("L'indice de la ligne est invalide.");
+    }
+}
+
+
 }
