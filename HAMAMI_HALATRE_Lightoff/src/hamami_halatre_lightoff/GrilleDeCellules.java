@@ -30,16 +30,26 @@ public GrilleDeCellules(int p_nbLignes, int p_nbColonnes) {
 public String toString() {
     StringBuilder builder = new StringBuilder();
 
-    for (int i = 0; i < nbLignes; i++) {
-        for (int j = 0; j < nbColonnes; j++) {
-            builder.append(matriceCellules[i][j].toString());
+    // Afficher les indices de colonnes
+    builder.append("   ");
+    for (int j = 0; j < nbColonnes; j++) {
+        builder.append(j).append(" "); // Ajout des indices de colonnes
+    }
+    builder.append("\n");
 
+    // Afficher chaque ligne de la grille avec l'indice de ligne
+    for (int i = 0; i < nbLignes; i++) {
+        builder.append(i).append("  "); // Afficher l'indice de la ligne
+
+        for (int j = 0; j < nbColonnes; j++) {
+            builder.append(matriceCellules[i][j].toString()).append(" "); // Ajouter l'état de la cellule (O ou X)
         }
-        builder.append("\n"); // Saut de ligne après chaque ligne de la grille
+        builder.append("\n"); // Saut de ligne après chaque ligne
     }
 
     return builder.toString();
 }
+
 
  // Méthode pour activer une ligne ou une colonne ou une diagonale aléatoire
 public void activerLigneColonneOuDiagonaleAleatoire() {
