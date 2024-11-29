@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package hamami_halatre_lightoff;
+import java.util.Random;
 
 /**
  *
@@ -39,6 +40,75 @@ public String toString() {
 
     return builder.toString();
 }
+
+ // Méthode pour activer une ligne ou une colonne ou une diagonale aléatoire
+public void activerLigneColonneOuDiagonaleAleatoire() {
+        Random rand = new Random();
+
+        // Générer un nombre aléatoire pour choisir entre ligne, colonne ou diagonale
+        int choix = rand.nextInt(5); // Choix entre 0-4 (5 possibilités)
+        
+        if (choix < 2) {
+            // Activer une ligne (0 ou 1)
+            int idLigne = rand.nextInt(nbLignes); // Choisir une ligne aléatoire
+            activerLigneDeCellules(idLigne);
+            //System.out.println("Ligne " + idLigne + " activée.");
+        } else if (choix < 4) {
+            // Activer une colonne (2 ou 3)
+            int idColonne = rand.nextInt(nbColonnes); // Choisir une colonne aléatoire
+            activerColonneDeCellules(idColonne);
+            //System.out.println("Colonne " + idColonne + " activée.");
+        } else {
+            // Activer une diagonale aléatoire (4)
+            int diagonale = rand.nextInt(2); // 0 pour diagonale descendante, 1 pour montante
+            if (diagonale == 0) {
+                activerDiagonaleDescendante();
+               // System.out.println("Diagonale descendante activée.");
+            } else {
+                activerDiagonaleMontante();
+               // System.out.println("Diagonale montante activée.");
+            }
+        }
+    }
+
+// Méthode pour mélanger la grille aléatoirement pendant un nombre spécifié de tours
+public void melangerMatriceAleatoirement(int nbTours) {
+        Random rand = new Random();
+
+        // 1. Éteindre toutes les cellules avant de commencer
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                matriceCellules[i][j].eteindre_cellule(); // Éteindre chaque cellule
+            }
+        }
+// 2. Effectuer les tours
+        for (int tour = 0; tour < nbTours; tour++) {
+            int choix = rand.nextInt(5); // Choix entre 0-4 (ligne, colonne ou diagonale)
+
+            if (choix < 2) {
+                // Activer une ligne (0 ou 1)
+                int idLigne = rand.nextInt(nbLignes); // Choisir une ligne aléatoire
+                activerLigneDeCellules(idLigne);
+                System.out.println("Tour " + (tour + 1) + ": Ligne " + idLigne + " activée.");
+            } else if (choix < 4) {
+                // Activer une colonne (2 ou 3)
+                int idColonne = rand.nextInt(nbColonnes); // Choisir une colonne aléatoire
+                activerColonneDeCellules(idColonne);
+                System.out.println("Tour " + (tour + 1) + ": Colonne " + idColonne + " activée.");
+            } else {
+                // Activer une diagonale aléatoire (4)
+                int diagonale = rand.nextInt(2); // 0 pour diagonale descendante, 1 pour montante
+                if (diagonale == 0) {
+                    activerDiagonaleDescendante();
+                    System.out.println("Tour " + (tour + 1) + ": Diagonale descendante activée.");
+                } else {
+                    activerDiagonaleMontante();
+                    System.out.println("Tour " + (tour + 1) + ": Diagonale montante activée.");
+                }
+            }
+        }
+    }
+
 
 public void activerLigneDeCellules(int idLigne) {
     // Vérifier si l'indice de ligne est valide
