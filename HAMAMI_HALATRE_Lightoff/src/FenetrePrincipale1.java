@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import hamami_halatre_lightoff.GrilleDeCellules;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
@@ -10,17 +11,22 @@ import javax.swing.JButton;
  * @author Raphael
  */
 public class FenetrePrincipale1 extends javax.swing.JFrame {
+    public void initialiserPartie() {
+ grille.eteindreToutesLesCellules();
+ grille.melangerMatriceAleatoirement(10);
+ }
+GrilleDeCellules grille;
+int nbcoups;
+}
 
     /**
      * Creates new form FenetrePrincipale1
      */
     public FenetrePrincipale1() {
-        initComponents();
-        GrilleDeJeu grille;
-        int nbCoups;
+        initComponents();        
         int nbLignes = 10;
-        int nbColonnes = 10;
-        this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
+        int nbcClonnes = 10;
+        this.grille = new GrilleDeCellules(nbLignes, nbColonnes);
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
         for (int i=0; i < nbLignes; i++) {
             for (int j=0; j < nbColonnes; j++ ) {
