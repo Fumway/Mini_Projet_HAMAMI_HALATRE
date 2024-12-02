@@ -2,6 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.awt.GridLayout;
+import javax.swing.JButton;
 
 /**
  *
@@ -14,9 +16,17 @@ public class FenetrePrincipale1 extends javax.swing.JFrame {
      */
     public FenetrePrincipale1() {
         initComponents();
+        GrilleDeJeu grille;
+        int nbCoups;
         int nbLignes = 10;
         int nbColonnes = 10;
+        this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+        for (int i=0; i < nbLignes; i++) {
+            for (int j=0; j < nbColonnes; j++ ) {
+        grille.melangerMatriceAleatoirement(10);
+ }
+
     }
 
     /**
