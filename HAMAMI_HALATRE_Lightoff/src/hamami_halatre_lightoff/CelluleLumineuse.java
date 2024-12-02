@@ -12,12 +12,12 @@ public class CelluleLumineuse {
     private boolean etat; // la cellule est alumée ou éteinte 
 
     public CelluleLumineuse(boolean etat) { //constructeur qui initialise la celulle dans l'état false
-        this.etat = false;
+        this.etat = etat;
     }
-    public void alumer_la_cellule() { //la cellule s'allume 
+    public void allumerCellule() { //la cellule s'allume 
         this.etat = !this.etat;
     }
-    public void eteindre_cellule(){ //cellule eteinte 
+    public void eteindreCellule(){ //cellule eteinte 
         this.etat = false;
     }
     public boolean est_eteint(){
