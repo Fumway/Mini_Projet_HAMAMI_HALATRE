@@ -15,10 +15,13 @@ public class HAMAMI_HALATRE_Lightoff {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-    CelluleLumineuse cellule = new CelluleLumineuse(false);
-    System.out.println(cellule); // Devrait afficher "O"
-    cellule.alumer_la_cellule();
-    System.out.println(cellule); // Devrait afficher "X"
+Partie partie = new Partie(5, 5);
+
+        // Initialise la partie avec 10 mélanges
+        partie.InitialiserPartie(10);
+
+        // Lance la partie
+        partie.LancerPartie();
     }
     
 }
