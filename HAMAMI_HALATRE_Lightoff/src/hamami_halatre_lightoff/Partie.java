@@ -10,26 +10,26 @@ import java.util.Scanner;
  *
  * @author enniohalatre
  */
-public class Partie {                                                       //creation de la classe partie 
-    private GrilleDeCellules grille;                                             // attribut de la calsse partie 
+public class Partie {                                                                          //creation de la classe partie 
+    private GrilleDeCellules grille;                                                           // attribut de la calsse partie 
     private int nbcoups; 
 
-    public Partie(int p_nbLignes, int p_nbColonnes) {                           // Constructeur de la classe partie qui initialise le nb de colones et de lignes
+    public Partie(int p_nbLignes, int p_nbColonnes) {                                          // Constructeur de la classe partie qui initialise le nb de colones et de lignes
     this.grille = new GrilleDeCellules(p_nbLignes, p_nbColonnes);
-    this.nbcoups = 0;                                                       // initialisation du nb de coups du joueur a 0 
+    this.nbcoups = 0;                                                                          // initialisation du nb de coups du joueur a 0 
     }
     
 public void InitialiserPartie(int nbTours) {                                   
-    grille.melangerMatriceAleatoirement(nbTours);                                  // Mélange la grille
+    grille.melangerMatriceAleatoirement(nbTours);                                              // Mélange la grille
 }  
       
 public void LancerPartie () {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Bienvenue dans le jeu lightsoff ! ");
     
-    while (!grille.cellulesToutesEteintes()) {                                              // Tant qu'il reste des cellules allumées
-        System.out.println(grille);                                                         // Affiche l'état actuel de la grille
-        System.out.println("choissis une action (ligne, colonne ou diagonale) :");
+    while (!grille.cellulesToutesEteintes()) {                                                 // Tant qu'il reste des cellules allumées
+        System.out.println(grille);                                                            // Affiche l'état actuel de la grille
+        System.out.println("choissis une action (ligne, colonne ou diagonale) :");  
         System.out.println("1 - Activer une ligne");
         System.out.println("2 - Activer une colonne");
         System.out.println("3 - Activer la diagonale Descendante");
@@ -48,8 +48,8 @@ public void LancerPartie () {
                 int colonne = scanner.nextInt();
                 grille.activerColonneDeCellules(colonne);                                   // Active la colonne choissis 
             }
-            case 3 -> grille.activerDiagonaleDescendante(); // Active la diagonale descendante
-            case 4 -> grille.activerDiagonaleMontante(); // Active la diagonale montante
+            case 3 -> grille.activerDiagonaleDescendante();                                 // Active la diagonale descendante
+            case 4 -> grille.activerDiagonaleMontante();                                    // Active la diagonale montante
             default -> System.out.println("Choix invalide, réessayez.");
     }
         
