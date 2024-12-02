@@ -88,7 +88,7 @@ public void melangerMatriceAleatoirement(int nbTours) {
         // 1. Éteindre toutes les cellules avant de commencer
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                matriceCellules[i][j].eteindre_cellule(); // Éteindre chaque cellule
+                matriceCellules[i][j].eteindreCellule(); // Éteindre chaque cellule
             }
         }
 // 2. Effectuer les tours
@@ -124,7 +124,7 @@ public void activerLigneDeCellules(int idLigne) {
     // Vérifier si l'indice de ligne est valide
     if (idLigne >= 0 && idLigne < nbLignes) {
         for (int j = 0; j < nbColonnes; j++) {
-            matriceCellules[idLigne][j].alumer_la_cellule(); // Active la cellule
+            matriceCellules[idLigne][j].allumerCellule(); // Active la cellule
         }
     } else {
         System.out.println("L'indice de la ligne est invalide.");
@@ -135,7 +135,7 @@ public void activerColonneDeCellules(int idColonne) {
     // Vérifier si l'indice de colonne est valide
     if (idColonne >= 0 && idColonne < nbColonnes) {
         for (int i = 0; i < nbLignes; i++) {
-            matriceCellules[i][idColonne].alumer_la_cellule(); // Active la cellule
+            matriceCellules[i][idColonne].allumerCellule(); // Active la cellule
         }
     } else {
         System.out.println("L'indice de la colonne est invalide.");
@@ -144,16 +144,25 @@ public void activerColonneDeCellules(int idColonne) {
 
 public void activerDiagonaleDescendante() {
     for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
-        matriceCellules[i][i].alumer_la_cellule(); // Active la cellule sur la diagonale descendante
+        matriceCellules[i][i].allumerCellule(); // Active la cellule sur la diagonale descendante
     }
 }
 
 public void activerDiagonaleMontante() {
     for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
-        matriceCellules[i][nbColonnes - 1 - i].alumer_la_cellule(); // Active la cellule sur la diagonale montante
+        matriceCellules[i][nbColonnes - 1 - i].allumerCellule(); // Active la cellule sur la diagonale montante
     }
 }
 
-
+public boolean cellulesToutesEteintes() {                       //si les cllules sont éteintes 
+    for (int i = 0; i < nbLignes; i++) {
+        for (int j = 0; j < nbColonnes; j++) {
+            if (!matriceCellules[i][j].est_eteint()) {
+                return false;                                   // Si une cellule est allumée, retournez false
+            }
+        }
+    }
+    return true;                                                // Toutes les cellules sont éteintes
+}
 
 }

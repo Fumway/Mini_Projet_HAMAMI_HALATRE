@@ -19,16 +19,14 @@ public class Partie {                                                       //cr
     this.nbcoups = 0;                                                       // initialisation du nb de coups du joueur a 0 
     }
     
-public void InitialiserPartie() {
-    grille.eteindreToutesLesCellules();                                     // étein toutes les cellules pour démarer la partie 
-    grille.melangerMatriceAleatoirement();                                  // Mélange la grille
+public void InitialiserPartie(int nbTours) {                                   
+    grille.melangerMatriceAleatoirement(nbTours);                                  // Mélange la grille
 }  
       
 public void LancerPartie () {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Bienvenue dans le jeu lightsoff ! ");
-    System.out.println("Bienvenue dans le jeu lightsoff ! ");
-
+    
     while (!grille.cellulesToutesEteintes()) {                                              // Tant qu'il reste des cellules allumées
         System.out.println(grille);                                                         // Affiche l'état actuel de la grille
         System.out.println("choissis une action (ligne, colonne ou diagonale) :");
