@@ -2,14 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import hamami_halatre_lightoff.GrilleDeCellules;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 /**
  *
  * @author enniohalatre
  */
 public class FenetrePrincipale extends javax.swing.JFrame {
 
+    private GrilleDeCellules grille;                                                           // attribut de la calsse partie 
+    private int nbcoups;
+    
     /**
      * Creates new form FenetrePrincipale
      */
@@ -17,6 +23,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         initComponents();
         int p_nbLignes = 10;
         int p_nbColonnes = 10;
+        this.grille = new GrilleDeCellules(p_nbLignes, p_nbColonnes);
         PanneauGrille.setLayout(new GridLayout(p_nbLignes, p_nbColonnes));
         for (int i=0; i < p_nbLignes; i++) {
             for (int j=0; j < p_nbColonnes; j++ ) {
@@ -24,7 +31,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
             }
         }
-    }
+    }    
+    public void InitialiserPartie() {
+        grille.cellulesToutesEteintes();
+        grille.melangerMatriceAleatoirement(10);
+     }       
 
     /**
      * This method is called from within the constructor to initialize the form.
