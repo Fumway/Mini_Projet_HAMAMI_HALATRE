@@ -15,11 +15,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
      */
     public FenetrePrincipale() {
         initComponents();
-        int nbLignes = 10;
-        int nbColonnes = 10;
-        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        for (int i=0; i < nbLignes; i++) {
-            for (int j=0; j < nbColonnes; j++ ) {
+        int p_nbLignes = 10;
+        int p_nbColonnes = 10;
+        PanneauGrille.setLayout(new GridLayout(p_nbLignes, p_nbColonnes));
+        for (int i=0; i < p_nbLignes; i++) {
+            for (int j=0; j < p_nbColonnes; j++ ) {
                 JButton bouton_cellule = new JButton(); // création d'un bouton
                 PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
             }

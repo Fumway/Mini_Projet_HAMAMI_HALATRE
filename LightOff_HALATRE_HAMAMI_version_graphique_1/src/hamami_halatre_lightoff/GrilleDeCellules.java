@@ -10,13 +10,13 @@ import java.util.Random;
  * @author enniohalatre
  */
 public class GrilleDeCellules {
-    private int nbLignes; // Nombre de lignes de la grille
-    private int nbColonnes; // Nombre de colonnes de la grille
+    private int p_nbLignes; // Nombre de lignes de la grille
+    private int p_nbColonnes; // Nombre de colonnes de la grille
     private CelluleLumineuse[][] matriceCellules; // La grille contenant les cellules lumineuses
  
 public GrilleDeCellules(int p_nbLignes, int p_nbColonnes) {
-    this.nbLignes = p_nbLignes;
-    this.nbColonnes = p_nbColonnes;
+    this.p_nbLignes = p_nbLignes;
+    this.p_nbColonnes = p_nbColonnes;
     this.matriceCellules = new CelluleLumineuse[p_nbLignes][p_nbColonnes];
 
     // Création de chaque CelluleLumineuse dans la grille
@@ -32,16 +32,16 @@ public String toString() {
 
     // Afficher les indices de colonnes
     builder.append("   ");
-    for (int j = 0; j < nbColonnes; j++) {
+    for (int j = 0; j < p_nbColonnes; j++) {
         builder.append(j).append(" "); // Ajout des indices de colonnes
     }
     builder.append("\n");
 
     // Afficher chaque ligne de la grille avec l'indice de ligne
-    for (int i = 0; i < nbLignes; i++) {
+    for (int i = 0; i < p_nbLignes; i++) {
         builder.append(i).append("  "); // Afficher l'indice de la ligne
 
-        for (int j = 0; j < nbColonnes; j++) {
+        for (int j = 0; j < p_nbColonnes; j++) {
             builder.append(matriceCellules[i][j].toString()).append(" "); // Ajouter l'état de la cellule (O ou X)
         }
         builder.append("\n"); // Saut de ligne après chaque ligne
@@ -49,6 +49,12 @@ public String toString() {
 
     return builder.toString();
 }
+public boolean getCelluleEtat(int ligne, int colonne) {
+        if (ligne >= 0 && ligne < p_nbLignes && colonne >= 0 && colonne < p_nbColonnes) {
+            return !matriceCellules[ligne][colonne].est_eteint();
+        }
+        return false;
+    }
 
 
  // Méthode pour activer une ligne ou une colonne ou une diagonale aléatoire
@@ -60,12 +66,12 @@ public void activerLigneColonneOuDiagonaleAleatoire() {
         
         if (choix < 2) {
             // Activer une ligne (0 ou 1)
-            int idLigne = rand.nextInt(nbLignes); // Choisir une ligne aléatoire
+            int idLigne = rand.nextInt(p_nbLignes); // Choisir une ligne aléatoire
             activerLigneDeCellules(idLigne);
             //System.out.println("Ligne " + idLigne + " activée.");
         } else if (choix < 4) {
             // Activer une colonne (2 ou 3)
-            int idColonne = rand.nextInt(nbColonnes); // Choisir une colonne aléatoire
+            int idColonne = rand.nextInt(p_nbColonnes); // Choisir une colonne aléatoire
             activerColonneDeCellules(idColonne);
             //System.out.println("Colonne " + idColonne + " activée.");
         } else {
@@ -86,8 +92,8 @@ public void melangerMatriceAleatoirement(int nbTours) {
         Random rand = new Random();
 
         // 1. Éteindre toutes les cellules avant de commencer
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
+        for (int i = 0; i < p_nbLignes; i++) {
+            for (int j = 0; j < p_nbColonnes; j++) {
                 matriceCellules[i][j].eteindreCellule(); // Éteindre chaque cellule
             }
         }
@@ -97,12 +103,12 @@ public void melangerMatriceAleatoirement(int nbTours) {
 
             if (choix < 2) {
                 // Activer une ligne (0 ou 1)
-                int idLigne = rand.nextInt(nbLignes); // Choisir une ligne aléatoire
+                int idLigne = rand.nextInt(p_nbLignes); // Choisir une ligne aléatoire
                 activerLigneDeCellules(idLigne);
                 System.out.println("Tour " + (tour + 1) + ": Ligne " + idLigne + " activée.");
             } else if (choix < 4) {
                 // Activer une colonne (2 ou 3)
-                int idColonne = rand.nextInt(nbColonnes); // Choisir une colonne aléatoire
+                int idColonne = rand.nextInt(p_nbColonnes); // Choisir une colonne aléatoire
                 activerColonneDeCellules(idColonne);
                 System.out.println("Tour " + (tour + 1) + ": Colonne " + idColonne + " activée.");
             } else {
@@ -122,8 +128,8 @@ public void melangerMatriceAleatoirement(int nbTours) {
 
 public void activerLigneDeCellules(int idLigne) {
     // Vérifier si l'indice de ligne est valide
-    if (idLigne >= 0 && idLigne < nbLignes) {
-        for (int j = 0; j < nbColonnes; j++) {
+    if (idLigne >= 0 && idLigne < p_nbLignes) {
+        for (int j = 0; j < p_nbColonnes; j++) {
             matriceCellules[idLigne][j].allumerCellule(); // Active la cellule
         }
     } else {
@@ -133,8 +139,8 @@ public void activerLigneDeCellules(int idLigne) {
 
 public void activerColonneDeCellules(int idColonne) {
     // Vérifier si l'indice de colonne est valide
-    if (idColonne >= 0 && idColonne < nbColonnes) {
-        for (int i = 0; i < nbLignes; i++) {
+    if (idColonne >= 0 && idColonne < p_nbColonnes) {
+        for (int i = 0; i < p_nbLignes; i++) {
             matriceCellules[i][idColonne].allumerCellule(); // Active la cellule
         }
     } else {
@@ -143,26 +149,26 @@ public void activerColonneDeCellules(int idColonne) {
 }
 
 public void activerDiagonaleDescendante() {
-    for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
+    for (int i = 0; i < Math.min(p_nbLignes, p_nbColonnes); i++) {
         matriceCellules[i][i].allumerCellule(); // Active la cellule sur la diagonale descendante
     }
 }
 
 public void activerDiagonaleMontante() {
-    for (int i = 0; i < Math.min(nbLignes, nbColonnes); i++) {
-        matriceCellules[i][nbColonnes - 1 - i].allumerCellule(); // Active la cellule sur la diagonale montante
+    for (int i = 0; i < Math.min(p_nbLignes, p_nbColonnes); i++) {
+        matriceCellules[i][p_nbColonnes - 1 - i].allumerCellule(); // Active la cellule sur la diagonale montante
     }
 }
 
 public boolean cellulesToutesEteintes() {                       //si les cllules sont éteintes 
-    for (int i = 0; i < nbLignes; i++) {
-        for (int j = 0; j < nbColonnes; j++) {
+    for (int i = 0; i < p_nbLignes; i++) {
+        for (int j = 0; j < p_nbColonnes; j++) {
             if (!matriceCellules[i][j].est_eteint()) {
                 return false;                                   // Si une cellule est allumée, retournez false
             }
         }
     }
     return true;                                                // Toutes les cellules sont éteintes
+    }
 }
 
-}
