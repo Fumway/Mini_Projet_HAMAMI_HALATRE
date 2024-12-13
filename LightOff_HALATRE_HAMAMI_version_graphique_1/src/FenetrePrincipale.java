@@ -32,12 +32,67 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 PanneauGrille.add(bouton_cellule); // ajout au Jpanel PanneauGrille
             }
         }
-    }    
+        nbcoups = 0; //initialisation du nombre de coups
+    }
     public void InitialiserPartie() {
         grille.cellulesToutesEteintes();
         grille.melangerMatriceAleatoirement(10);
-     }       
+     }
+ private void traiterAction(String type, int index) {
+        switch (type) {
+            case "ligne":
+                this.grille.activerLigneDeCellules(index);
+                break;
+            case "colonne":
+                this.grille.activerColonneDeCellules(index);
+                break;
+            case "diagonale Gauche ":
+                this.grille.activerDiagonaleMontante();
+                break;
+            case "diagonale":
+                this.grille.activerDiagonaleDescendante();
+                break;
+            default:
+                System.out.println("Action inconnue");
+                return;
+        }
 
+        // Incrémenter le nombre de coups
+        nbcoups++;
+        System.out.println("Nombre de coups : " + nbcoups);
+
+        // Vérifier si la grille est éteinte
+        if (grille.cellulesToutesEteintes()) {
+            afficherMessageFinDePartie("Bravo ! La grille est éteinte.");
+            desactiverBoutons();
+        }
+
+        // Limite du nombre de coups
+        if (nbcoups >= 20) {
+            afficherMessageFinDePartie("Partie terminée ! Vous avez atteint la limite de coups.");
+            desactiverBoutons();
+        }
+
+        repaint();
+    }
+
+    private void afficherMessageFinDePartie(String message) {
+        javax.swing.JOptionPane.showMessageDialog(this, message, "Fin de la partie", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void desactiverBoutons() {
+        btnLigne1.setEnabled(false);
+        btnLigne2.setEnabled(false);
+        btnLigne3.setEnabled(false);
+        btnLigne4.setEnabled(false);
+        btnLigne5.setEnabled(false);
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,6 +113,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,7 +133,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
             .addGap(0, 310, Short.MAX_VALUE)
         );
 
-        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 330, 310));
+        getContentPane().add(PanneauGrille, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 330, 310));
 
         btnLigne1.setText("btn ligne 0");
         btnLigne1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +141,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 btnLigne1ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLigne1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 100, 40));
+        getContentPane().add(btnLigne1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 100, 40));
 
         btnLigne2.setText("btn ligne 1");
         btnLigne2.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +149,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 btnLigne2ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLigne2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 100, 50));
+        getContentPane().add(btnLigne2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 50));
 
         btnLigne3.setText("btn ligne 2");
         btnLigne3.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +157,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 btnLigne3ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLigne3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 100, 50));
+        getContentPane().add(btnLigne3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 100, 50));
 
         btnLigne4.setText("btn ligne 3");
         btnLigne4.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +165,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 btnLigne4ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLigne4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 100, 50));
+        getContentPane().add(btnLigne4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 100, 50));
 
         btnLigne5.setText("btn ligne 4");
         btnLigne5.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +173,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 btnLigne5ActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLigne5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 100, 50));
+        getContentPane().add(btnLigne5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 100, 50));
 
         jButton1.setText("Colone 0");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +181,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 70, 60));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -10, 70, 60));
 
         jButton2.setText("Colone 1");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +189,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 70, 60));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -10, 70, 60));
 
         jButton3.setText("Colone 2");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +197,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 50, 60));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, -10, 50, 60));
 
         jButton4.setText("Colone 3");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +205,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 50, 60));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, -10, 50, 60));
 
         jButton5.setText("Colone 4");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +213,26 @@ public class FenetrePrincipale extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 40, 60));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, -10, 40, 60));
+
+        jButton6.setText("Diag Droite");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, -10, -1, 50));
+
+        jButton7.setText("Diag Gauche");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, 40));
+
+        jTextField1.setText("nombre de coups : ");
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 160, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +297,18 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     repaint();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    this.grille.activerDiagonaleMontante();
+    repaint();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    this.grille.activerDiagonaleDescendante();
+    repaint();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,5 +356,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }
