@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-import hamami_halatre_lightoff.CelluleGraphique;
-import hamami_halatre_lightoff.GrilleDeCellules;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import javax.swing.JButton;
@@ -14,8 +12,8 @@ import javax.swing.JPanel;
  */
 public class FenetrePrincipale extends javax.swing.JFrame {
 
-    private GrilleDeCellules grille;                                             // attribut de la calsse partie 
-    private int nbcoups;
+    private GrilleDeCellules grille;                                             // attribut de la classe partie 
+    private int nbcoups;                                                         // initialisation du nombres de coups 
     
     /**
      * Creates new form FenetrePrincipale
@@ -67,35 +65,17 @@ public class FenetrePrincipale extends javax.swing.JFrame {
             }
         }
         
-        nbcoups = 0; //initialisation du nombre de coups
+        nbcoups = 1; //initialisation du nombre de coups
     }
     public void InitialiserPartie() {
         grille.cellulesToutesEteintes();
         grille.melangerMatriceAleatoirement(10);
      }
  private void traiterAction() {
-      /*  switch (type) {
-            case "ligne":
-                this.grille.activerLigneDeCellules(index);
-                break;
-            case "colonne":
-                this.grille.activerColonneDeCellules(index);
-                break;
-            case "diagonale Gauche ":
-                this.grille.activerDiagonaleMontante();
-                break;
-            case "diagonale":
-                this.grille.activerDiagonaleDescendante();
-                break;
-            default:
-                System.out.println("Action inconnue");
-                return;
-        }
-*/
         // Incrémenter le nombre de coups
+    
+    jLabel2.setText(" Tu as joué "+ nbcoups+" coups");
     nbcoups++;
-    System.out.println("Nombre de coups : " + nbcoups);
-
         // Vérifier si la grille est éteinte
     if (grille.cellulesToutesEteintes()) {
         afficherMessageFinDePartie("Bravo ! tu as réussi à éteindre toutes les cellules !");
@@ -103,7 +83,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }
 
         // Limite du nombre de coups
-    if (nbcoups >= 10) {
+    if (nbcoups >= 20) {
         afficherMessageFinDePartie("Tu as perdu  :( tu as atteint la limite de coups.");
         desactiverBoutons();
         }
@@ -112,7 +92,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
     }
 
     private void afficherMessageFinDePartie(String message) {
-        javax.swing.JOptionPane.showMessageDialog(this, message, "Fin de la partie", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        dispose(); //enlève la page de jeu
+        FenetreVictoire f = new FenetreVictoire();
+        f.setVisible(true);
     }
 
     private void desactiverBoutons() {
@@ -148,6 +130,7 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         btnLigne2 = new javax.swing.JButton();
         btnLigne1 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -155,7 +138,6 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         PanneauBoutonVerticaux = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -245,9 +227,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(btnLigne1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLigne2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,7 +244,11 @@ public class FenetrePrincipale extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 450));
 
-        jPanel3.setBackground(new java.awt.Color(51, 0, 153));
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Tu as joué ... coups");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 150, -1));
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 204));
 
         jButton2.setText("Colone 1");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -311,37 +297,34 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 550, 90));
-
-        jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 460, 150, -1));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 550, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 700, 550));
 
@@ -477,7 +460,9 @@ public class FenetrePrincipale extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FenetrePrincipale().setVisible(true);
+                Menu m = new Menu();
+                new Menu().setVisible(true);
+                new FenetrePrincipale().setVisible(false);
             }
         });
     }
